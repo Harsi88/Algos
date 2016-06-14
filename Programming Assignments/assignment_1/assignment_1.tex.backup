@@ -1,0 +1,411 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fixltx2e}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#1} % Assignment title
+\newcommand{\hmwkDueDate}{Sunday,\ August\ 25,\ 2013} % Due date
+\newcommand{\hmwkClass}{CSL\ 356} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{S. Iyengar} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Harsimran Singh} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+{\bf Give an algorithm to detect whether a given undirected graph contains a cycle.\
+If the graph contains a cycle then your algorithm should output one.(It should \
+not output all the cycles of the graph it should output just one of them). The \
+running time of your algorithm should be \emph{O(m+n)} for a graph with n nodes \
+and m edges.}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+\begin{center}
+{\bf Solution }
+\end{center}
+Depth first search can be used to check whether an undirected graph contains a cycle\
+or not. Initially all the node are marked not visited. Start from a node, say x\textsubscript{i} and mark it visited.
+Then call the DFS on children of this node recursively and make x\textsubscript{i} \
+(the node which called the DFS on them) their parent. While doing this if you encounter\
+a visited node than you have found a cycle (because both nodes were already connected in DFS 
+tree and now we have found an edge between them, hence a cycle). Now take these nodes and by backtracing their\
+parent nodes we will get that cycle.
+
+Because, we are performing DFS which takes \emph{O(m+n)} to complete, our algorithm's time 
+complexity is also \emph{O(m+n)}.
+}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+{\bf Inspired by the example of that great Cornellian, Vladimir Nabokov, some 
+of your friends have become amateur lepidopterists (they study butterflies). \
+Often when they return from a trip with specimens of butterflies, 
+it is very difficult for them to tell how many distinct species they've 
+caught-thanks to the fact that many species look very similar to one 
+another. One day they return with n butterflies, and they believe that each 
+belongs to one of two different species, which we'll call A and B for 
+purposes of this discussion. They'd like to divide the n specimens into 
+two groups-those that belong to A and those that belong to B-but it's 
+very hard for them to directly label anyone specimen. So they decide to 
+adopt the following approach. 
+For each pair of specimens i and j, they study them carefully side by 
+side. If they're confident enough in their judgment, then they label the 
+pair (i,j) either \lq\lq same\rq\rq\@ (meaning they believe them both to come from 
+the same species) or \lq\lq different\rq\rq\@ (meaning they believe them to come from 
+different species). They also have the option of rendering no judgment 
+on a given pair, in which case we'll call the pair ambiguous. 
+So now they have the collection of n specimens, as well as a collection 
+of m judgements (either \lq\lq same\rq\rq\@ or \lq\lq different\rq\rq) for the pairs that were not 
+declared to be ambiguous. They'd like to know if this data is consistent 
+with the idea that each butterfly is from one of species A or B. So more 
+concretely, we'll declare the m judgements to be consistent if it is possible 
+to label each specimen either A or B in such a way that for each pair (i,j) 
+labeled \lq\lq same\rq\rq\@, it is the case that i and j have the same label; and for each 
+pair (i,j) labeled \lq\lq different\rq\rq\@, it is the case that i and j have different labels. 
+They're in the middle of tediously working out whether their judgements 
+are consistent, when one of them realizes that you probably have an 
+algorithm that would answer this question right away. 
+Give an algorithm with running time \emph{O(m + n)} that determines 
+whether the m judgements are consistent. 
+}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+\begin{center}
+{\bf Solution }
+\end{center}
+Let G=(V,E) be a graph  with all the butterflies as their vertices and judgements as edges
+between the vertices.
+Initially all vertices are white. Start with DFS on a node, say x\textsubscript{r} and turn it grey. Now call DFS on children,
+say x\textsubscript{i}, x\textsubscript{i+1}, ..., x\textsubscript{i+j} recursively. Check the label
+of all the pairs generated at each call (a parent and a child) ( x\textsubscript{a}, x\textsubscript{b} ).
+Let us say x\textsubscript{a} is grey in color.
+Color x\textsubscript{b} grey ( same as x\textsubscript{a} ) if label is same, otherwise
+color x\textsubscript{b} black (different from x\textsubscript{a} ). 
+
+We say two nodes are consistent, if 
+
+label is ``same'' $\Rightarrow$ both are same in color and
+
+label is ``different'' $\Rightarrow$ both are different in color 
+
+Now, if during this algorithm we encounter a node x\textsubscript{n} which is already
+colored. If node which called DFS on x\textsubscript{n}, say x\textsubscript{m} is 
+consistent with x\textsubscript{n} then we carry on otherwise we say there is 
+inconsistency in their judgements.
+
+Because we are using DFS, therefore order of our algorithm is \emph{O(m+n)}.
+}
+\end{homeworkProblem}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+{\bf We have a connected graph \emph{G = (V, E)} and a specific vertex U $\in$ V. Suppose 
+we compute a depth-first search tree rooted at u, and obtain a tree T that 
+includes all nodes of G. Suppose we then compute a breadth-first search 
+tree rooted at u, and obtain the same tree T. Prove that G = T. (In other 
+words, if T is both a depth-first search tree and a breadth-first search 
+tree rooted at u, then G cannot contain any edges that do not belong to 
+T.) 
+}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+\begin{center}
+{\bf Solution }
+\end{center}
+Let us assume that $\exists$ an edge (s,t) in \emph{G = (V,E)} which is not present 
+in Tree T.
+
+If s and t has an edge between them in the graph then either of s or t must be 
+ancester of other in DFS tree T.
+
+$\Rightarrow$ $\exists$ another path between s and t in graph that is included in tree T,
+because edge (s,t) is not in the tree.
+Let this path be s, x\textsubscript{1}, x\textsubscript{2},...,x\textsubscript{j}, t.
+Let L\textsubscript{s} be the layer of s in tree T and similarly, L\textsubscript{t}
+is the layer of t in tree T. Because $\exists$ at least one vertex in the path from s 
+and t in DFS tree T $\Rightarrow$ difference between L\textsubscript{s} and L\textsubscript{t} 
+is at least 2.
+
+Now while building BFS tree (which should be same as DFS tree T), because s and t has edge 
+between them, so they will either belong to same layer L\textsubscript{s} or two different
+layers L\textsubscript{s} and L\textsubscript{t} such that difference between layers is 1.
+
+But in DFS tree T, L\textsubscript{s} and L\textsubscript{t} are at least two layers apart.
+$\Rightarrow$ DFS tree T is not same as BFS tree, but we are given that both trees are same.
+
+Hence, Contradiction.
+
+Therefore, $\exists$ no edge (s,t) which is present in G but not in Tree T $\Rightarrow$ G=T.
+}
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+{\bf Some friends of yours work on wireless networks, and they're currently 
+studying the properties of a network of n mobile devices. As the devices 
+move around (actually, as their human owners move around), they define 
+a graph at any point in time as follows: there is a node representing each 
+of the n devices, and there is an edge between device i and device j if the 
+physical locations of i and j are no more than 500 meters apart. (If so, we 
+say that i and j are \lq\lq in range\rq\rq\@ of each other.)
+They'd like it to be the case that the network of devices is connected at 
+all times, and so they've constrained the motion of the devices to satisfy
+the following property: at all times, each device i is within 500 meters 
+of at least n/2 of the other devices. (We'll assume n is an even number.) 
+What they'd like to know is: Does this property by itself guarantee that 
+the network will remain connected? 
+Here's a concrete way to formulate the question as a claim about 
+graphs.
+
+\
+
+\emph{Claim: Let G be a graph on n nodes, where n is an even number. If every node 
+of G has degree at least n/2, then G is connected. }
+
+\
+
+Decide whether you think the claim is true or false, and give a proof of 
+either the claim or its negation.
+}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+\begin{center}
+{\bf Solution }
+\end{center}
+Let us assume that graph G = (V,E) with n nodes (n is even) is not connected $\Rightarrow$ 
+$\exists$ two nodes s and t in the graph
+such that there is no path between them.
+
+\emph{Given:} s and t both have degree at least n/2.\
+
+Let say s has degree i and has edge with vertices V\textsubscript{s} = \{ s\textsubscript{1}, s\textsubscript{2},...,s\textsubscript{i}\}
+and t has degree j and has edge with vertices V\textsubscript{t} = \{ t\textsubscript{1}, t\textsubscript{2},...,t\textsubscript{j}\}.\
+Both i and j are greater than n/2.\
+
+If there is no path between them $\Rightarrow$
+V\textsubscript{s} and V\textsubscript{t} are disjoint.
+This will result in number of nodes $\geq$ n+2 
+
+Number of nodes = ($\mid$\{ s \}$\mid$ + $\mid$\{ s \}$\mid$ + $\mid$\{ V\textsubscript{s} \}$\mid$ + $\mid$\{ V\textsubscript{t} \}$\mid$
+
+Number of nodes $\geq$ 1+1+n/2+n/2
+
+Number of nodes $\geq$ n+2
+
+But our graph G has only n nodes.
+
+Hence contradiction.
+
+Thus, our assumption is false.
+
+Therefore, $\exists$ no s and t such that there is no path from s to t.
+
+Hence, graph G is connected.
+}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+{\bf There's a natural intuition that two nodes that are far apart in a 
+communication network-separated by many hops-have a more tenuous 
+connection than two nodes that are close together. There are a number 
+of algorithmic results that are based to some extent on different ways of 
+making this notion precise. Here's one that involves the susceptibility of 
+paths to the deletion of nodes. 
+
+Suppose that an n-node undirected graph G = (V, E) contains two 
+nodes s and t such that the distance between s and t is strictly greater 
+than n/2. Show that there must exist some node v, not equal to either s 
+or t, such that deleting v from G destroys all s-t paths. (In other words, 
+the graph obtained from G by deleting v contains no path from s to t.) 
+Give an algorithm with running, time O(m + n) to find such a node v
+}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+\begin{center}
+{\bf Solution }
+\end{center}
+Distance between s and t is strictly greater than n/2 $\Rightarrow$ there are at least 
+n/2 nodes between s and t, let say a\textsubscript{1}, a\textsubscript{2},..., a\textsubscript{m}
+and m $\geq$ n/2.
+
+If $\exists$ a vertex a\textsubscript{i} which is not included in any cycle formation in the graph than 
+this vertex can be removed to disconnect s from t, because every path from s to t must go through 
+this vertex a\textsubscript{i}.
+
+Now, We will prove that such vertex always exists under given conditions.
+
+Let say $\exists$ a path between two vertices a\textsubscript{i} and a\textsubscript{j} other 
+than a\textsubscript{i}, a\textsubscript{i+1},...,a\textsubscript{j}.
+We call this path a\textsubscript{i}, x\textsubscript{1}, x\textsubscript{2},..., x\textsubscript{d}, a\textsubscript{j}.
+Length of this path must be greater than the length of former path, otherwise it will reduce the distance between 
+s and t. Therefore we need at least n/2 vertices to involve all a\textsubscript{i} 's in the cycle, but we have less than
+(n/2)-2 vertices at our disposal. Therefore, there will always be a vertex a\textsubscript{i} such that it is not included 
+in any cycle formation.
+
+\textbf{Algorithm}: Perform BFS on the given graph starting from s. There will be a layer in the BFS tree which will contain only 
+one vertex.
+
+\textbf{Explanation:} BFS Tree will have at least n/2 layers , because distance between s and t is atleast n/2. If 
+we have atleast 2 vertices in each layer than it will result in nodes more than n.
+
+\
+
+This is the vertex we need to remove to disconnect s from t.
+
+\textbf{Explanation:} There will be no edge that connects two components divided by this vertex because if there is an edge between 
+two vertices then they are atmost 1 layer apart.
+}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
